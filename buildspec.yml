@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR Public...
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/p7a5x1t5
+
+  build:
+    commands:
+      - echo Building Docker image...
+      - docker build -t phpimage .
+
+      # Tag the Docker image
+      - echo Tagging Docker image...
+      - docker tag phpimage:latest public.ecr.aws/p7a5x1t5/phpimage:latest
+
+  post_build:
+    commands:
+      - echo Pushing Docker image to Amazon ECR Public...
+      - docker push public.ecr.aws/p7a5x1t5/phpimage:latest
