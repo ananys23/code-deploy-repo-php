@@ -1,5 +1,15 @@
 version: 0.0
-os: linux
-files:
-  - source: /
-    destination: /var/www/html
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: arn:aws:ecs:eu-north-1:126099912700:task-definition/myphp
+        LoadBalancerInfo:
+          ContainerName: webserver
+          ContainerPort: 80
+
+  - YourECRRepo:
+      Type: AWS::ECR::Repository
+      Properties:
+        RepositoryName: phpimage
+
