@@ -1,15 +1,9 @@
 version: 0.0
 Resources:
   - TargetService:
-      Type: AWS::ECS::Service
+      Type: AWS::EC2::Instance
       Properties:
-        TaskDefinition: arn:aws:ecs:eu-north-1:126099912700:task-definition/myphp
-        LoadBalancerInfo:
-          ContainerName: webserver
-          ContainerPort: 80
-
-  - YourECRRepo:
-      Type: AWS::ECR::Repository
-      Properties:
-        RepositoryName: phpimage
-
+        TaskDefinition: 
+          ContainerDefinitions:
+            - Name: php-application
+              Image: public.ecr.aws/p7a5x1t5/phpimage:latest
