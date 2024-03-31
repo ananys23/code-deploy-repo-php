@@ -1,9 +1,0 @@
-version: 0.0
-Resources:
-  - TargetService:
-      Type: AWS::EC2::Instance
-      Properties:
-        TaskDefinition: 
-          ContainerDefinitions:
-            - Name: php-application
-              Image: public.ecr.aws/p7a5x1t5/phpimage:latest
